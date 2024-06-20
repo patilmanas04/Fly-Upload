@@ -57,8 +57,26 @@ const MediaState = ({ children }) => {
 		}
     }
 
+	const getMedia = async () => {
+		try{
+			const response = await fetch(`${host}/api/media/getmedia`, {
+				method: 'GET',
+				headers: {
+					'Content-Type': 'application/json',
+					'Auth-Token': localStorage.getItem('authToken')
+				}
+			})
+
+			const media = await response.json()
+			setGallery(media)
+		}
+		catch(error){
+			console.error(error)
+		}
+	}
+
     return (
-        <MediaContext.Provider value={{gallery, uploadMedia}}>
+        <MediaContext.Provider value={{gallery, uploadMedia, getMedia}}>
             {children}
         </MediaContext.Provider>
     )
