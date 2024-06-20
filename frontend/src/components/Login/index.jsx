@@ -119,7 +119,7 @@ const Span = styled.a`
 
 const Login = (props) => {
     const { setUsername, showAlert } = props
-    const checkBoxRef = useRef(null)
+    // const checkBoxRef = useRef(null)
     const navigate = useNavigate()
 
     useEffect(() => {
@@ -150,10 +150,10 @@ const Login = (props) => {
         const json = await response.json()
 
         if(json.success){
-            if(checkBoxRef.current.checked){
-                localStorage.setItem("authToken", json.authToken)
-            }
-            localStorage.setItem("loggedIn", true)
+            // if(checkBoxRef.current.checked){
+            // }
+            localStorage.setItem("authToken", json.authToken)
+            // localStorage.setItem("loggedIn", true)
             setUsername(userCredentials.username)
             showAlert("success", "Login successful!")
             navigate(`/dashboard/${userCredentials.username}`)
@@ -178,10 +178,10 @@ const Login = (props) => {
                     <Label>Password</Label>
                     <Input type="password" name="password" placeholder="Enter your password" onChange={onChange} required/>
                 </FieldWrapper>
-                <RememberMe>
+                {/* <RememberMe>
                     <Checkbox ref={checkBoxRef} type="checkbox" id="rememberMe" name="rememberMe"/>
                     <Label htmlFor="rememberMe">Remember Me</Label>
-                </RememberMe>
+                </RememberMe> */}
                 <LoginButton type="submit">Login</LoginButton>
             </Form>
             <Switch>

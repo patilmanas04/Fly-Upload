@@ -72,19 +72,11 @@ const LogOutButton = styled.button`
 	}
 `
 
-const Header = (props) => {
-	const { setLoggedIn } = props
+const Header = () => {
 	const navigate = useNavigate()
 
-	useEffect(() => {
-		const loggedIn = localStorage.getItem('loggedIn')?true:false
-		setLoggedIn(loggedIn)
-	}, [])
-
-	const loggedIn = localStorage.getItem('loggedIn')?true:false
-
 	const handleLogOut = () => {
-		localStorage.removeItem('loggedIn')
+		localStorage.removeItem('authToken')
 		navigate('/login')
 	}
 
@@ -101,7 +93,7 @@ const Header = (props) => {
 			<Logo>FlyUpload</Logo>
 			<Options>
 				{
-					loggedIn?
+					localStorage.getItem("authToken")?
 					<LogOutButton onClick={handleLogOut}>Log out</LogOutButton>
 					:
 					<>

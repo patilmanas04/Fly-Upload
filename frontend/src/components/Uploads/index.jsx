@@ -1,5 +1,6 @@
-import React from 'react'
+import React, { useContext, useState } from 'react'
 import styled from 'styled-components'
+import MediaContext from '../../contexts/mediaContext'
 
 const UploadsWrapper = styled.div`
 	display: flex;
@@ -53,18 +54,48 @@ const UploadButton = styled.button`
 `
 
 const Uploads = () => {
+	const context = useContext(MediaContext)
+	const { uploadMedia } = context
+
+	const [image, setImage] = useState(null)
+	const [video, setVideo] = useState(null)
+
+	const handleImageSubmit = async (e) => {
+		try{
+			e.preventDefault()
+			uploadMedia(image, 'image')
+			e.target.reset()
+			console.log('Image Uploaded Successfully!!')
+		}
+		catch(error){
+			console.error(error)
+		}
+	}
+
+	const handleVideoSubmit = async (e) => {
+		try{
+			e.preventDefault()
+			uploadMedia(video, 'video')
+			e.target.reset()
+			console.log('Video Uploaded Successfully!!')
+		}
+		catch(error){
+			console.error(error)
+		}
+	}
+
 	return (
 		<UploadsWrapper>
 			<UploadsTitle>Upload Images or Videos</UploadsTitle>
 			<FormsContainer>
-				<UploadForm>
+				<UploadForm onSubmit={handleImageSubmit}>
 					<UploadLabel htmlFor="imageUpload">Upload Image</UploadLabel>
-					<UploadInput type="file" id="imageUpload" name="imageUpload" accept="image/*" />
+					<UploadInput type="file" id="imageUpload" name="imageUpload" accept="image/*" onChange={(e) => setImage((prev) => e.target.files[0])}/>
 					<UploadButton type='submit'>Upload Image</UploadButton>
 				</UploadForm>
-				<UploadForm>
+				<UploadForm onSubmit={handleVideoSubmit}>
 					<UploadLabel htmlFor="videoUpload">Upload Video</UploadLabel>
-					<UploadInput type="file" id="videoUpload" name="videoUpload" accept="video/*" />
+					<UploadInput type="file" id="videoUpload" name="videoUpload" accept="video/*" onChange={(e) => setVideo((prev) => e.target.files[0])}/>
 					<UploadButton type='submit'>Upload Video</UploadButton>
 				</UploadForm>
 			</FormsContainer>

@@ -4,7 +4,6 @@ import MainContentArea from '../MainContentArea/index.jsx'
 
 const Dashboard = (props) => {
     const { username } = props
-    const [loggedIn, setLoggedIn] = useState(false)
 
     useEffect(() => {
         document.title = `Dashboard | ${username} | FlyUpload`
@@ -12,8 +11,8 @@ const Dashboard = (props) => {
 
     return (
         <>
-            <Header setLoggedIn={setLoggedIn}/>
-            <MainContentArea loggedIn={loggedIn}/>
+            <Header/>
+            <MainContentArea/>
         </>
     )
 }

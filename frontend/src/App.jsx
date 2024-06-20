@@ -11,6 +11,7 @@ import { useState } from 'react';
 import Dashboard from './components/Dashboard/index.jsx';
 import styled, { ThemeProvider } from 'styled-components';
 import { lightTheme } from './utils/Theme.js';
+import MediaState from './contexts/MediaState.jsx';
 
 const Body = styled.div`
 	width: 100%;
@@ -40,18 +41,20 @@ const App = () => {
 
 	return (
 		<>
-		<ThemeProvider theme={lightTheme}>
-			<Router>
-				<AlertBox alert={alert} closeAlert={closeAlert} />
-				<Routes>
-					<Route exact path="/" element={<Register showAlert={showAlert} setUsername={setUsername} />} />
-					<Route exact path="/register" element={<Register showAlert={showAlert} setUsername={setUsername} />} />
-					<Route exact path="/login" element={<Login setUsername={setUsername} showAlert={showAlert} />} />
-					{/* <Route exact path="/secured" element={<SecuredPage username={username} showAlert={showAlert} />} /> */}
-					<Route exact path="/dashboard/:username" element={<Dashboard username={username}/>} />
-				</Routes>
-			</Router>
-		</ThemeProvider>
+		<MediaState>
+			<ThemeProvider theme={lightTheme}>
+				<Router>
+					<AlertBox alert={alert} closeAlert={closeAlert} />
+					<Routes>
+						<Route exact path="/" element={<Register showAlert={showAlert} setUsername={setUsername} />} />
+						<Route exact path="/register" element={<Register showAlert={showAlert} setUsername={setUsername} />} />
+						<Route exact path="/login" element={<Login setUsername={setUsername} showAlert={showAlert} />} />
+						{/* <Route exact path="/secured" element={<SecuredPage username={username} showAlert={showAlert} />} /> */}
+						<Route exact path="/dashboard/:username" element={<Dashboard username={username}/>} />
+					</Routes>
+				</Router>
+			</ThemeProvider>
+		</MediaState>
 		</>
 	);
 }
