@@ -57,9 +57,7 @@ const LogInButton = styled.button`
 	}
 `
 
-const MainContentArea = (props) => {
-	const { loggedIn } = props
-
+const MainContentArea = () => {
 	const navigate = useNavigate()
 
 	const handleLogIn = () => {
@@ -74,7 +72,7 @@ const MainContentArea = (props) => {
 				<SubHeading>Manage your drone data effortlessly. Upload and organize your images and videos, all in one place. Get started by uploading your files below.</SubHeading>
 			</WelcomeMessage>
 			{
-				loggedIn?
+				localStorage.getItem("authToken")?
 				<>
 				<Uploads />
 				<FileExplorer />
