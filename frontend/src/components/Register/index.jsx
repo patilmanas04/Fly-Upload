@@ -122,7 +122,7 @@ const Span = styled.a`
 const Register = (props) => {
     const navigate = useNavigate()
     const { showAlert, setUsername } = props
-    const checkBoxRef = useRef(null)
+    // const checkBoxRef = useRef(null)
 
     const loadUser = async() => {
         const authToken = localStorage.getItem("authToken")
@@ -173,9 +173,9 @@ const Register = (props) => {
         const json = await response.json()
 
         if(json.success){
-            if(checkBoxRef.current.checked){
-                localStorage.setItem("authToken", json.authToken)
-            }
+            // if(checkBoxRef.current.checked){
+            // }
+            localStorage.setItem("authToken", json.authToken)
             showAlert("success", "Account created successfully.")
             navigate('/login')
         }
@@ -199,10 +199,10 @@ const Register = (props) => {
                     <Label>Password</Label>
                     <Input type="password" name="password" placeholder="Password must be 8 characters long" onChange={onChange} required/>
                 </FieldWrapper>
-                <RememberMe>
+                {/* <RememberMe>
                     <Checkbox ref={checkBoxRef} type="checkbox" id="rememberMe" name="rememberMe"/>
                     <Label htmlFor="rememberMe">Remember Me</Label>
-                </RememberMe>
+                </RememberMe> */}
                 <SignUpButton type="submit">Sign up</SignUpButton>
             </Form>
             <Switch>
