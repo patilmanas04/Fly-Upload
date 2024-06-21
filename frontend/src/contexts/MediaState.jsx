@@ -14,9 +14,12 @@ const MediaState = ({ children }) => {
 			formData.append('mediaType', type)
 			formData.append('mediaSize', `${(media.size/100000).toFixed(2)} MB`)
 
+			console.log(formData.keys())
+
 			const serverResponse = await fetch(`${host}/api/media/upload`, {
 				method: 'POST',
 				headers: {
+					// 'Content-Type': 'multipart/form-data',
 					'Auth-Token': localStorage.getItem('authToken'),
 				},
 				body: formData
