@@ -19,10 +19,24 @@ router.post('/upload', fetchUserDetails, upload.single('file'), async (req, res)
         const { title, mediaType, mediaSize } = req.body;
 
         const filePath = req.file.path;
-        const result = await cloudinary.uploader.upload(filePath, {
-            resource_type: mediaType === 'image' ? 'image' : 'video',
-            folder: mediaType === 'image' ? 'images' : 'videos',
-        });
+
+        const imageUploadOptions = {
+            folder: 'images',
+            resource_type: 'image'
+        }
+
+        const videoUploadOptions = {
+            folder: 'videos',
+            resource_type: 'video',
+            transformation: {
+                video: {
+                    codec: 'h264',
+                    bitrate: '64k',
+                }
+            }
+        }
+
+        const result = await cloudinary.uploader.upload(filePath, mediaType==="image"?imageUploadOptions:videoUploadOptions);
 
         fs.unlinkSync(filePath);
 
@@ -33,7 +47,7 @@ router.post('/upload', fetchUserDetails, upload.single('file'), async (req, res)
             title: title,
             mediaType: mediaType,
             mediaLink: mediaLink,
-            mediaSize: mediaSize
+            mediaSize: `${((result.bytes)/(1024*1024)).toFixed(2)} MB`,
         })
 
         res.json(savedMedia)

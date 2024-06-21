@@ -139,7 +139,7 @@ const Register = (props) => {
 
 			if(json.success){
                 setUsername(json.userDetails.username)
-				navigate(`/dashboard/${json.userDetails.username}`)
+				navigate(`/dashboard`)
 			}
 		}
     }

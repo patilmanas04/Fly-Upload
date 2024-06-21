@@ -52,6 +52,10 @@ const Files = styled.div`
 	gap: 20px;
 `
 
+const Message = styled.p`
+	font-size: 16px;
+`
+
 const FileExplorer = () => {
 	const context = useContext(MediaContext)
 	const { getMedia, gallery } = context
@@ -87,13 +91,21 @@ const FileExplorer = () => {
 					<Option ref={option3} onClick={setActive}>Videos</Option>
 				</OptionsList>
 			</Options>
-			<Files>
-				{
-					gallery.map((media, index) => (
-						<File key={index} media={media} />
-					))
-				}
-			</Files>
+			{
+				gallery.length > 0 ? (
+					<Files>
+						{
+							gallery.map((media, index) => (
+								<File key={index} media={media} />
+							))
+						}
+					</Files>
+				) : (
+					<Message>
+						Your gallery is currently empty. Upload your favorite images and videos to start your collection!
+					</Message>
+				)
+			}
 		</FileExplorerWrapper>
 	)
 }
