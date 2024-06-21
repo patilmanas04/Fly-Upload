@@ -156,7 +156,7 @@ const Login = (props) => {
             // localStorage.setItem("loggedIn", true)
             setUsername(userCredentials.username)
             showAlert("success", "Login successful!")
-            navigate(`/dashboard/${userCredentials.username}`)
+            navigate(`/dashboard`)
         }
         else{
             showAlert("error", "Invalid credentials!")

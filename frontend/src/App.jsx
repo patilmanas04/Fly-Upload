@@ -50,7 +50,7 @@ const App = () => {
 						<Route exact path="/register" element={<Register showAlert={showAlert} setUsername={setUsername} />} />
 						<Route exact path="/login" element={<Login setUsername={setUsername} showAlert={showAlert} />} />
 						{/* <Route exact path="/secured" element={<SecuredPage username={username} showAlert={showAlert} />} /> */}
-						<Route exact path="/dashboard/:username" element={<Dashboard username={username}/>} />
+						<Route exact path="/dashboard" element={<Dashboard username={username}/>} />
 					</Routes>
 				</Router>
 			</ThemeProvider>
