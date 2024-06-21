@@ -90,12 +90,12 @@ const Uploads = () => {
 			<FormsContainer>
 				<UploadForm onSubmit={handleImageSubmit}>
 					<UploadLabel htmlFor="imageUpload">Upload Image</UploadLabel>
-					<UploadInput type="file" id="imageUpload" name="imageUpload" accept="image/*" onChange={(e) => setImage((prev) => e.target.files[0])}/>
+					<UploadInput type="file" id="imageUpload" name="imageUpload" accept="image/*" onChange={(e) => setImage((prev) => e.target.files[0])} required/>
 					<UploadButton type='submit'>Upload Image</UploadButton>
 				</UploadForm>
 				<UploadForm onSubmit={handleVideoSubmit}>
 					<UploadLabel htmlFor="videoUpload">Upload Video</UploadLabel>
-					<UploadInput type="file" id="videoUpload" name="videoUpload" accept="video/*" onChange={(e) => setVideo((prev) => e.target.files[0])}/>
+					<UploadInput type="file" id="videoUpload" name="videoUpload" accept="video/*" onChange={(e) => setVideo((prev) => e.target.files[0])} required/>
 					<UploadButton type='submit'>Upload Video</UploadButton>
 				</UploadForm>
 			</FormsContainer>

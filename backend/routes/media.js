@@ -63,7 +63,7 @@ router.get('/getmedia', fetchUserDetails, async(req, res) => {
     }
 })
 
-router.delete('/delete/:id', fetchUserDetails, async (req, res) => {
+router.delete('/deletemedia/:id', fetchUserDetails, async (req, res) => {
     try{
         const id = req.params.id
         const media = await Media.findById(id)
@@ -80,11 +80,27 @@ router.delete('/delete/:id', fetchUserDetails, async (req, res) => {
             })
         }
     
+        const mediaLink = media.mediaLink
+        const mediaType = media.mediaType
+        const mediaName = mediaLink.split('/').pop().split('.').shift()
+
+        const result = await cloudinary.uploader.destroy(`${mediaType==="image"?"images":"videos"}/${mediaName}`, {
+            resource_type: mediaType
+        })
+
+        if(result.result !== 'ok'){
+            return res.status(500).json({
+                error: "Internal Server Error",
+                message: "Error deleting media from cloudinary"
+            })
+        }
+
         const deletedMedia = await Media.findByIdAndDelete(id)
     
         res.json({
             message: "Media deleted successfully",
-            deletedMedia: deletedMedia
+            deletedMedia: deletedMedia,
+            cloudinaryResponse: result
         })
     }
     catch(error){
