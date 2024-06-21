@@ -27,7 +27,7 @@ const MediaState = ({ children }) => {
 
 			const data = await serverResponse.json()
 
-            setGallery([...gallery, data])
+            setGallery(gallery.concat(data))
 		}
 		catch(error){
 			console.error(error)
@@ -52,8 +52,27 @@ const MediaState = ({ children }) => {
 		}
 	}
 
+	const deleteMedia = async (id) => {
+		try{
+			const updatedGallery = gallery.filter(media => {
+				return media._id !== id
+			})
+			setGallery(updatedGallery)
+			
+			const response = await fetch(`${host}/api/media/deletemedia/${id}`, {
+				method: 'DELETE',
+				headers: {
+					'Auth-Token': localStorage.getItem('authToken')
+				}
+			})
+		}
+		catch(error){
+			console.error(error)
+		}
+	}
+
     return (
-        <MediaContext.Provider value={{gallery, uploadMedia, getMedia}}>
+        <MediaContext.Provider value={{gallery, uploadMedia, getMedia, deleteMedia}}>
             {children}
         </MediaContext.Provider>
     )
