@@ -6,4 +6,6 @@ export const lightTheme = {
     secondary: "#ffffff",
     border: "#ccc",
     borderFocus: "#000",
+    green: "#4CE470",
+    red: "#FF0000",
 }

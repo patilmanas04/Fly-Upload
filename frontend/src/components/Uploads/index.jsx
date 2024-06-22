@@ -1,6 +1,7 @@
 import React, { useContext, useState } from 'react'
 import styled from 'styled-components'
 import MediaContext from '../../contexts/mediaContext'
+import BarLoader from 'react-spinners/BarLoader'
 
 const UploadsWrapper = styled.div`
 	display: flex;
@@ -53,9 +54,17 @@ const UploadButton = styled.button`
 	}
 `
 
+const Loader = styled.div`
+	width: 100%;
+	margin-top: 20px;
+	display: flex;
+	justify-content: flex-start;
+	align-items: flex-start;
+`
+
 const Uploads = () => {
 	const context = useContext(MediaContext)
-	const { uploadMedia } = context
+	const { uploadMedia, loading } = context
 
 	const [image, setImage] = useState(null)
 	const [video, setVideo] = useState(null)
@@ -99,6 +108,9 @@ const Uploads = () => {
 					<UploadButton type='submit'>Upload Video</UploadButton>
 				</UploadForm>
 			</FormsContainer>
+			<Loader>
+				<BarLoader color="#EA454C" loading={loading} width="100%"/>
+			</Loader>
 		</UploadsWrapper>
 	)
 }

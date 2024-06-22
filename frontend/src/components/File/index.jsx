@@ -1,6 +1,7 @@
-import React, { useContext } from 'react'
+import React, { useContext, useRef } from 'react'
 import styled from 'styled-components'
 import MediaContext from '../../contexts/mediaContext'
+import CloseIcon from '@mui/icons-material/Close';
 
 const FileWrapper = styled.div`
 	display: flex;
@@ -73,6 +74,34 @@ const FileOptionButton = styled.button`
 	}	
 `
 
+const FileViewer = styled.div`
+    display: none;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100vh;
+    padding: 20px;
+    overflow: hidden;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 999;
+    background-color: rgba(0, 0, 0, 0.8);
+`
+
+const ImageContainer = styled.div`
+    height: 100%;
+    background-color: red;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+`
+
+const Img = styled.img`
+    height: 100%;
+    /* object-fit: cover; */
+`
+
 const File = (props) => {
     const context = useContext(MediaContext)
     const { deleteMedia } = context
@@ -80,9 +109,18 @@ const File = (props) => {
     const mediaType = media.mediaType
     const mediaLink = media.mediaLink
     const mediaTypeExtension = mediaLink.split('/').pop().split('.').pop()
+    const fileViewer = useRef(null)
 
     const handleDeleteRequest = () => {
         deleteMedia(media._id)
+    }
+
+    const showFileViewer = () => {
+        fileViewer.current.style.display = 'flex'
+    }
+
+    const closeFileViewer = () => {
+        fileViewer.current.style.display = 'none'
     }
 
     return (
@@ -98,12 +136,30 @@ const File = (props) => {
                     }
                 </FileIconContainer>
                 <FileName>{media.title}</FileName>
+                <FileSize>{media.mediaType.toUpperCase()}</FileSize>
                 <FileSize>{media.mediaSize}</FileSize>
             </FileDetails>
             <FileOptions>
                 <FileOptionButton type="button" onClick={handleDeleteRequest}>Delete</FileOptionButton>
-                <FileOptionButton type="button">View</FileOptionButton>
+                {
+                    mediaType === 'image' ? <FileOptionButton type="button" onClick={showFileViewer}>View</FileOptionButton>
+                    :
+                    ""
+                }
             </FileOptions>
+            <FileViewer ref={fileViewer}>
+                <ImageContainer>
+                    <Img src={mediaLink} alt="media" />
+                </ImageContainer>
+                <CloseIcon style={{
+                    cursor: 'pointer',
+                    color: '#fff',
+                    position: 'absolute',
+                    top: '20px',
+                    right: '20px',
+                    fontSize: '30px',
+                }} onClick={closeFileViewer}/>
+            </FileViewer>
         </FileWrapper>
     )
 }

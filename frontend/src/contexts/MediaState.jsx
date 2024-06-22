@@ -5,9 +5,12 @@ const MediaState = ({ children }) => {
     const host = "http://localhost:5000";
     const authToken = localStorage.getItem("authToken");
     const [gallery, setGallery] = useState([]);
+	const [loading, setLoading] = useState(false)
 
     const uploadMedia = async (media, type) => {
 		try{
+			setLoading(true)
+
 			const formData = new FormData()
 			formData.append('file', media)
 			formData.append('title', media.name)
@@ -28,6 +31,8 @@ const MediaState = ({ children }) => {
 			const data = await serverResponse.json()
 
             setGallery(gallery.concat(data))
+
+			setLoading(false)
 		}
 		catch(error){
 			console.error(error)
@@ -72,7 +77,7 @@ const MediaState = ({ children }) => {
 	}
 
     return (
-        <MediaContext.Provider value={{gallery, uploadMedia, getMedia, deleteMedia}}>
+        <MediaContext.Provider value={{gallery, uploadMedia, getMedia, deleteMedia, loading}}>
             {children}
         </MediaContext.Provider>
     )

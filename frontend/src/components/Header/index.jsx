@@ -16,6 +16,11 @@ const HeaderWrapper = styled.div`
 const Logo = styled.h1`
 	font-size: 24px;
 	font-style: italic;
+	font-family: "Playwrite NG Modern", cursive;
+	font-optical-sizing: auto;
+	font-weight: 400;
+	font-style: normal;
+	user-select: none;
 `
 
 const Options = styled.div`
