@@ -1,24 +1,41 @@
-# AeroDash: Drone Data Management Dashboard
+# FlyUpload: Images and Video Management Dashboard
 
 ## Overview
 
-**AeroDash** is a robust web application designed to manage drone data efficiently in the cloud. Built with the MERN stack (MongoDB, Express, React, Node.js), AeroDash provides a comprehensive dashboard with user authentication, file upload capabilities for images and videos, and backend video compression to ensure optimal storage and performance.
+**FlyUpload** is a robust web application designed to manage images and videos efficiently in the cloud. Built with the MERN stack (MongoDB, Express, React, Node.js), FlyUpload provides a comprehensive dashboard with user authentication, file upload capabilities for images and videos.
 
 ## Features
 
 - **User Authentication**: Secure login and signup functionality using email or username.
-- **Dashboard**: Intuitive and user-friendly interface for managing drone data.
+- **Dashboard**: Intuitive and user-friendly interface.
 - **File Upload**: Seamless upload of images and videos with support for multiple file formats.
-- **Video Compression**: Efficient backend video compression to maintain quality while reducing file size.
 - **Cloud Storage**: Integration with cloud services to store and manage uploaded files.
 
 ## Tech Stack
 
-- **Frontend**: React.js, Next.js
+- **Frontend**: React.js
 - **Backend**: Node.js, Express.js
 - **Database**: MongoDB
-- **File Handling**: Multer, Sharp, FFmpeg
+- **File Handling**: Multer
 - **Authentication**: JWT (JSON Web Tokens)
+
+## Video Demo
+
+
+
+## Screenshots
+
+![Screenshot 1](demo/signup.png)
+*Signup page*
+
+![Screenshot 2](demo/login.png)
+*Login page*
+
+![Screenshot 3](demo/dashboard.png)
+*Dashboard*
+
+![Screenshot 4](demo/filepreview.png)
+*File preview*
 
 ## Getting Started
 
@@ -26,7 +43,7 @@
 
 - Node.js
 - MongoDB
-- FFmpeg
+- nodemon (optional, for backend server)
 
 ### Installation
 
@@ -38,19 +55,19 @@
 
 2. Install backend dependencies:
     ```bash
-    cd server
+    cd backend
     npm install
     ```
 
 3. Install frontend dependencies:
     ```bash
-    cd ../client
+    cd ../frontend
     npm install
     ```
 
 4. Set up environment variables:
 
-    Create a `.env` file in the `server` directory and add the following variables:
+    Create a `.env` file in the `backend` directory and add the following variables:
     ```bash
     MONGO_URI=your_mongodb_connection_string
     JWT_SECRET=your_jwt_secret
@@ -60,13 +77,13 @@
 
 1. Start the backend server:
     ```bash
-    cd server
-    npm start
+    cd backend
+    nodemon index.js
     ```
 
 2. Start the frontend server:
     ```bash
-    cd ../client
+    cd ../frontend
     npm run dev
     ```
 
