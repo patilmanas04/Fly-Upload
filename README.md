@@ -52,7 +52,7 @@
 1. Clone the repository:
    ```bash
    git clone https://github.com/patilmanas04/Fly-Upload.git
-   cd AeroDash
+   cd 'Fly-Upload'
    ```
 
 2. Install backend dependencies:
