@@ -21,7 +21,9 @@
 
 ## Video Demo
 
+## Video Demo
 
+[Click here to watch the demo video](https://res.cloudinary.com/dgszxxbcl/video/upload/v1719076738/videos/bvzwlnzoyocdwym9qe7y.mp4)
 
 ## Screenshots
 
@@ -71,6 +73,9 @@
     ```bash
     MONGO_URI=your_mongodb_connection_string
     JWT_SECRET=your_jwt_secret
+    CLOUDINARY_CLOUD_NAME=your_cloudinary_cloud_name
+    CLOUDINARY_API_KEY=your_cloudinary_api_key
+    CLOUDINARY_SECRET_KEY=your_cloudinary_secret_key
     ```
 
 ### Running the Application
